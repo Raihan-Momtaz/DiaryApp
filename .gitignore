@@ -1,0 +1,10 @@
+﻿# Visual Studio / .NET build files
+.vs/
+bin/
+obj/
+Debug/
+Release/
+*.user
+*.suo
+*.log
+*.cache

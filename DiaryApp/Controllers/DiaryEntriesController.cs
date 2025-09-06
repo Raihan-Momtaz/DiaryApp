@@ -17,9 +17,36 @@ namespace DiaryApp.Controllers
             return View(objDiaryEntryList);
         }
 
-        public IActionResult Create()
+        [HttpPost]
+        public IActionResult Create(DiaryEntry obj)
         {
-            return View();
+            _db.DiaryEntries.Add(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+
+
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            DiaryEntry? diaryEntry = _db.DiaryEntries.Find(id);
+            if (diaryEntry == null)
+            {
+                return NotFound();
+            }
+            return View(diaryEntry);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(DiaryEntry obj)
+        {
+            _db.DiaryEntries.Update(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
     }
 
